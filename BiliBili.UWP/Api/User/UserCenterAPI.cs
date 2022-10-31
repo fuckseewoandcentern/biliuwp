@@ -48,8 +48,11 @@ namespace BiliBili.UWP.Api.User
         /// <returns></returns>
         public ApiModel UserSubmitVideosWeb(string mid,int page=1,int pagesize=30)
         {
+            var d = new Dictionary<string, string>();
+            d.Add("User-Agent", "T");
             ApiModel api = new ApiModel()
             {
+                headers = d,
                 method =HttpMethod.GET,
                 baseUrl = "https://api.bilibili.com/x/space/arc/search",
                 parameter = $"mid={mid}&ps={pagesize}&tid=0&pn={page}&keyword=&order=pubdate",

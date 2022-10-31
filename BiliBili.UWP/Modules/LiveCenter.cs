@@ -67,8 +67,9 @@ namespace BiliBili.UWP.Modules
         {
             try
             {
-                
-                string url = $"https://api.live.bilibili.com/relation/v1/App/LiveHomePage?access_key={ApiHelper.access_key}&actionKey=appkey&appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&device=android&mobi_app=android&platform=android&ts={ApiHelper.GetTimeSpan}";
+
+                //string url = $"https://api.live.bilibili.com/relation/v1/App/LiveHomePage?access_key={ApiHelper.access_key}&actionKey=appkey&appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&device=android&mobi_app=android&platform=android&ts={ApiHelper.GetTimeSpan}";
+                string url = $"https://api.live.bilibili.com/xlive/app-interface/v1/relation/liveAnchor?access_key={ApiHelper.access_key}&appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&device=android&mobi_app=android&platform=android&ts={ApiHelper.GetTimeSpan}&qn=0&sortRule=0&filterRule=0";
                 url += "&sign=" + ApiHelper.GetSign(url);
                 var results = await WebClientClass.GetResults(new Uri(url));
                 var model = results.ToDynamicJObject();
@@ -110,7 +111,7 @@ namespace BiliBili.UWP.Modules
             try
             {
 
-                string url = $"https://api.live.bilibili.com/relation/v1/App/UnLiveRooms?access_key={ApiHelper.access_key}&actionKey=appkey&appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&device=android&mobi_app=android&page={page}&pagesize=20&platform=android&ts={ApiHelper.GetTimeSpan}";
+                string url = $"https://api.live.bilibili.com/xlive/app-interface/v1/relation/unliveAnchor?access_key={ApiHelper.access_key}&appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&device=android&mobi_app=android&page={page}&pagesize=20&platform=android&ts={ApiHelper.GetTimeSpan}&qn=0&sortRule=0&filterRule=0";
                 url += "&sign=" + ApiHelper.GetSign(url);
                 var results = await WebClientClass.GetResults(new Uri(url));
                 var model = results.ToDynamicJObject();

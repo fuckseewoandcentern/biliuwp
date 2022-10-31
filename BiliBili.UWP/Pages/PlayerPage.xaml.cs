@@ -242,6 +242,7 @@ namespace BiliBili.UWP.Pages
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 await new MessageDialog("无法播放此视频 ＞﹏＜ \r\n请尝试更换清晰度或者在播放设置中打开/关闭DASH").ShowAsync();
+
             });
         }
         private async void MediaPlayer_MediaEnded(MediaPlayer sender, object args)
@@ -1266,8 +1267,8 @@ namespace BiliBili.UWP.Pages
                 ToggleMenuFlyoutItem noneItem = new ToggleMenuFlyoutItem() { Text = "无" };
                 noneItem.Click += Menuitem_Click;
                 menu.Items.Add(noneItem);
-                (menu.Items[0] as ToggleMenuFlyoutItem).IsChecked = true;
-                SetSubTitle((menu.Items[0] as ToggleMenuFlyoutItem).Tag.ToString());
+                (noneItem as ToggleMenuFlyoutItem).IsChecked = true;
+                //SetSubTitle((menu.Items[0] as ToggleMenuFlyoutItem).Tag.ToString());
                 MTC.CCSelectFlyout = menu;
             }
             else

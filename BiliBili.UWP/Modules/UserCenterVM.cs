@@ -402,7 +402,7 @@ namespace BiliBili.UWP.Modules
 
             public string pic
             {
-                get { return _pic.Replace("//", "http://"); }
+                get { return _pic; }
                 set { _pic = value; }
             }
             public string description { get; set; }

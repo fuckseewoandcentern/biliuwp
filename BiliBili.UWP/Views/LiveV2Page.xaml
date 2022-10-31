@@ -84,14 +84,19 @@
                         </DataTemplate>
                     </GridView.ItemTemplate>
                 </GridView>
+<!--
                 <StackPanel Padding="8" Background="{ThemeResource Bili-List-Background}" Margin="0 8 0 0">
                     <Grid >
-                        <StackPanel Orientation="Horizontal">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="583*"/>
+                            <ColumnDefinition Width="886*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
                             <TextBlock Text="{Binding Path=HourRank.module_info.title}"></TextBlock>
                             <TextBlock Margin="4 0" VerticalAlignment="Bottom" FontSize="14"  Foreground="Gray" Text="{Binding Path=HourRank.extra_info.sub_title}"></TextBlock>
                         </StackPanel>
-                        <HyperlinkButton Command="{Binding HandelLiveUrlNavigationCommand}" CommandParameter="https://live.bilibili.com/p/eden/rank" Foreground="Gray" Padding="0" HorizontalAlignment="Right">
-                           
+                        <HyperlinkButton Command="{Binding HandelLiveUrlNavigationCommand}" CommandParameter="https://live.bilibili.com/p/eden/rank" Foreground="Gray" Padding="0" Grid.Column="1" Margin="812,0,0,0">
+
                             <TextBlock>查看更多 <Run FontSize="12" FontFamily="Segoe MDL2 Assets" Text="&#xE00F;" /></TextBlock>
                         </HyperlinkButton>
                     </Grid>
@@ -137,11 +142,9 @@
                                 <TextBlock FontSize="12" TextAlignment="Center" Foreground="Gray" TextTrimming="CharacterEllipsis" Text="{Binding Path=area_v2_name}"></TextBlock>
                             </StackPanel>
                         </HyperlinkButton>
-
                     </Grid>
-                    
-                    
                 </StackPanel>
+ -->
                 <ItemsControl ItemsSource="{Binding RoomList}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -192,10 +195,10 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-              
+
             </StackPanel>
         </ScrollViewer>
-      
+
         <AppBarButton  x:Name="b_btn_Refresh" Click="b_btn_Refresh_Click" Width="48" Height="48" Margin="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Icon="Refresh" Background="{ThemeResource Bili-ForeColor}" Opacity="0.6" Foreground="White"></AppBarButton>
     </Grid>
 </Page>

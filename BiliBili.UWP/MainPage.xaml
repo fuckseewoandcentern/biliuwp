@@ -1053,7 +1053,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>-->
-      
+
         <Image  x:Name="img_bg" Grid.ColumnSpan="2"></Image>
         <Canvas x:Name="GlassHost" Grid.ColumnSpan="2"/>
         <Grid x:Name="grid_o" BorderThickness="0 0 1 0" BorderBrush="{ThemeResource Bili-ForeColor}">
@@ -1142,7 +1142,7 @@
                                     </Grid>
 
                                     <MenuFlyoutItem x:Name="btn_user_myGuanzhu" Click="btn_user_myGuanzhu_Click">关注的人</MenuFlyoutItem>
-                                  
+
                                     <MenuFlyoutItem x:Name="btn_user_mychistory" Click="btn_user_mychistory_Click">历史记录</MenuFlyoutItem>
                                     <MenuFlyoutItem x:Name="btn_user_toView" Click="btn_user_toView_Click">稍后再看</MenuFlyoutItem>
                                     <MenuFlyoutSeparator Background="#19000000"/>
@@ -1194,7 +1194,7 @@
                                 </StackPanel>
                             </ListViewItem>
 
-                           
+
                             <ListViewItem  Style="{StaticResource SelectItem}" Height="48" >
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" Margin="4 0" Glyph="&#xe637;" Foreground="White"/>
@@ -1243,7 +1243,7 @@
                                     <TextBlock Text="应用设置" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
                                 </StackPanel>
                             </ListViewItem>
-                            
+
                         </ListView>
                     </Grid>
 
@@ -1259,7 +1259,7 @@
                     </Frame>
                 </Grid>
             </SplitView>
-           
+
         </Grid>
         <Grid x:Name="bg" Visibility="Visible" Grid.Column="1">
 
@@ -1278,8 +1278,8 @@
                 </TransitionCollection>
             </Frame.ContentTransitions>
         </Frame>
-       
-            <StackPanel x:Name="music" Visibility="Visible"  Opacity="0.7" Background="{ThemeResource Bili-ForeColor}" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12 64">
+
+        <StackPanel x:Name="music" Visibility="Visible"  Opacity="0.7" Background="{ThemeResource Bili-ForeColor}" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12 64">
 
             <Grid   HorizontalAlignment="Right">
                 <Grid.RowDefinitions>
@@ -1293,21 +1293,21 @@
                 <Button  BorderThickness="0" Click="Button_Click" Padding="0"  Grid.RowSpan="2"  Background="#00000000">
                     <Image x:Name="music_img" Height="48" Width="48" Stretch="UniformToFill" ></Image>
                     <Button.Flyout>
-                     
-                            <Flyout >
-                                <StackPanel  Width="320">
-                                    <TextBlock Margin="4" x:Name="txt_musicInfo" TextWrapping="Wrap"></TextBlock>
-                                    <MediaPlayerElement x:Name="musicplayer"  AreTransportControlsEnabled="True">
-                                        <MediaPlayerElement.TransportControls>
-                                            <MediaTransportControls  Style="{StaticResource mediaTransportControls}" IsFullWindowButtonVisible="False" IsSeekEnabled="True"  IsZoomButtonVisible="False" IsZoomEnabled="False" IsPreviousTrackButtonVisible="True" IsNextTrackButtonVisible="True">
 
-                                            </MediaTransportControls>
-                                        </MediaPlayerElement.TransportControls>
-                                    </MediaPlayerElement>
-                                </StackPanel>
+                        <Flyout >
+                            <StackPanel  Width="320">
+                                <TextBlock Margin="4" x:Name="txt_musicInfo" TextWrapping="Wrap"></TextBlock>
+                                <MediaPlayerElement x:Name="musicplayer"  AreTransportControlsEnabled="True">
+                                    <MediaPlayerElement.TransportControls>
+                                        <MediaTransportControls  Style="{StaticResource mediaTransportControls}" IsFullWindowButtonVisible="False" IsSeekEnabled="True"  IsZoomButtonVisible="False" IsZoomEnabled="False" IsPreviousTrackButtonVisible="True" IsNextTrackButtonVisible="True">
 
-                            </Flyout>
-                       
+                                        </MediaTransportControls>
+                                    </MediaPlayerElement.TransportControls>
+                                </MediaPlayerElement>
+                            </StackPanel>
+
+                        </Flyout>
+
                     </Button.Flyout>
                 </Button>
                 <StackPanel Grid.Column="1"  Grid.Row="1" Orientation="Horizontal" Height="48">
@@ -1336,8 +1336,8 @@
                                                 </StackPanel>
                                             </HyperlinkButton>
                                         </Grid>
-                                       
-                                        
+
+
                                     </ListView.Header>
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -1381,9 +1381,9 @@
                     </Border>
                 </HyperlinkButton>
             </StackPanel>
-           
+
         </Grid>
-        
+
 
     </Grid>
 

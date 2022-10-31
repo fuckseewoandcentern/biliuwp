@@ -36,7 +36,7 @@ namespace BiliBili.UWP.Views
             base.OnNavigatedTo(e);
             if (e.NavigationMode== NavigationMode.New&& liveHome.RoomList==null)
             {
-                await liveHome.LoadHome();
+                await liveHome.LoadHome(); //XianzhaoDuan: 不初始化直播页
             }
             if (SettingHelper.Get_RefreshButton() && SettingHelper.IsPc())
             {

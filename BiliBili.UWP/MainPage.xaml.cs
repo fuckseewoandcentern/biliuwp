@@ -92,7 +92,7 @@ namespace BiliBili.UWP
 
 
         }
-      
+
 
         private void MessageCenter_ShowError(object sender, Exception e)
         {
@@ -105,7 +105,7 @@ namespace BiliBili.UWP
             //catch (Exception)
             //{
             //}
-            
+
         }
 
         private void MessageCenter_NetworkError(object sender, string e)
@@ -283,7 +283,7 @@ namespace BiliBili.UWP
                 }
             }
         }
-       
+
         DispatcherTimer timer;
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -308,7 +308,7 @@ namespace BiliBili.UWP
             MessageCenter.HomeNavigateToEvent += MessageCenter_HomeNavigateToEvent;
             MessageCenter.BgNavigateToEvent += MessageCenter_BgNavigateToEvent; ;
             MessageCenter.Logined += MessageCenter_Logined;
-           
+
             MessageCenter.ChangeBg += MessageCenter_ChangeBg;
             //main_frame.Navigate(typeof(ChannelPage));
             MessageCenter_ChangeBg();
@@ -448,7 +448,7 @@ namespace BiliBili.UWP
             MessageCenter.HomeNavigateToEvent -= MessageCenter_HomeNavigateToEvent;
             MessageCenter.BgNavigateToEvent -= MessageCenter_BgNavigateToEvent; ;
             MessageCenter.Logined -= MessageCenter_Logined;
-          
+
             MessageCenter.ChangeBg -= MessageCenter_ChangeBg;
         }
         private async void MessageCenter_ChangeBg()
@@ -669,7 +669,7 @@ namespace BiliBili.UWP
             }
 
             string ThemeName = SettingHelper.Get_Theme();
-            if (ThemeName== "Dark")
+            if (ThemeName == "Dark")
             {
                 RequestedTheme = ElementTheme.Dark;
             }
@@ -1049,7 +1049,7 @@ namespace BiliBili.UWP
             fy.Hide();
         }
 
-     
+
 
         private void btn_user_myvip_Click(object sender, RoutedEventArgs e)
         {
@@ -1084,7 +1084,7 @@ namespace BiliBili.UWP
 
         private void btn_UserInfo_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(typeof(UserCenterPage),ApiHelper.GetUserId());
+            frame.Navigate(typeof(UserCenterPage), ApiHelper.GetUserId());
             fy.Hide();
         }
 
@@ -1141,7 +1141,7 @@ namespace BiliBili.UWP
             }
             else if (item == "Test")
             {
-               
+
             }
             else
             {
@@ -1267,7 +1267,7 @@ namespace BiliBili.UWP
         }
         protected override Size MeasureOverride(Size availableSize)
         {
-            if (availableSize.Width>=800)
+            if (availableSize.Width >= 800)
             {
                 SetWideUI();
             }
@@ -1281,7 +1281,7 @@ namespace BiliBili.UWP
         private void SetNarrowUI()
         {
             grid_o.BorderThickness = new Thickness(0, 0, 1, 0);
-           
+
             bg.Visibility = Visibility.Collapsed;
             sp_View.DisplayMode = SplitViewDisplayMode.CompactOverlay;
             Grid.SetColumn(frame, 0);
@@ -1292,12 +1292,12 @@ namespace BiliBili.UWP
         private void SetWideUI()
         {
             grid_o.BorderThickness = new Thickness(0, 0, 1, 0);
-         
+
             sp_View.DisplayMode = SplitViewDisplayMode.CompactOverlay;
-            Grid.SetColumn(frame,1);
+            Grid.SetColumn(frame, 1);
             bg.Visibility = Visibility.Visible;
             btn_OpenMenu.Visibility = Visibility.Visible;
-            if (frame.CurrentSourcePageType == typeof(BlankPage)&&main_frame.CurrentSourcePageType==typeof(HomePage))
+            if (frame.CurrentSourcePageType == typeof(BlankPage) && main_frame.CurrentSourcePageType == typeof(HomePage))
             {
                 if (SettingHelper.Get_ColunmHome())
                 {
@@ -1359,7 +1359,7 @@ namespace BiliBili.UWP
                 {
                     SetTwoColumn();
                 }
-                else if(frame.SourcePageType != typeof(BlankPage))
+                else if (frame.SourcePageType != typeof(BlankPage))
                 {
                     SetTwoColumn();
                 }

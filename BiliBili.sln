@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliBili.UWP", "BiliBili.UWP\BiliBili.UWP.csproj", "{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}"
 EndProject
@@ -23,9 +23,9 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|Any CPU.Build.0 = Debug|x86
-		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|Any CPU.Build.0 = Debug|x64
+		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|ARM.ActiveCfg = Debug|ARM
 		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|ARM.Build.0 = Debug|ARM
 		{B6506127-B7E6-4C7E-9FFA-73B90F5E8623}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -92,7 +92,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {631FAB1A-4EBB-4E8E-AF78-E6162C32A50F}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

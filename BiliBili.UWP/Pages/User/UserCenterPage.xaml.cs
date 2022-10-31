@@ -38,6 +38,8 @@ namespace BiliBili.UWP.Pages.User
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            pivot.SelectedIndex = 0;
+            ls_dynamic.ClearData();
             if (e.NavigationMode == NavigationMode.New|| e.NavigationMode == NavigationMode.Back)
             {
                 if (e.Parameter == null)
@@ -136,10 +138,10 @@ namespace BiliBili.UWP.Pages.User
         {
             if (pivot.SelectedIndex == 1)
             {
-                if (ls_dynamic.Count() == 0)
-                {
+                //if (ls_dynamic.Count() == 0)
+                //{
                     GetDynamic();
-                }
+                //}
             }
         }
 

@@ -74,16 +74,16 @@ namespace BiliBili.UWP.Modules
             try
             {
                 Loading = true;
-                string url =ApiHelper.GetSignWithUrl( $"https://api.live.bilibili.com/xlive/app-interface/v2/index/getAllList?actionKey=appkey&appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&device=android&mobi_app=android&platform=android&qn=0&rec_page=1&relation_page=1&scale=xxhdpi&ts={ApiHelper.GetTimeSpan}",ApiHelper.AndroidKey);
+                string url =ApiHelper.GetSignWithUrl( $"https://api.live.bilibili.com/xlive/app-interface/v2/index/getAllList?appkey={ApiHelper.AndroidKey.Appkey}&build={ApiHelper.build}&mobi_app=android&platform=android&ts={ApiHelper.GetTimeSpan}&device=android&rec_page=1&relation_page=1&scale=xxhdpi",ApiHelper.AndroidKey);
                 var results = await WebClientClass.GetResults(new Uri(url));
                 var model = results.ToDynamicJObject();
                 if (model.code == 0)
                 {
                     live_home m = JsonConvert.DeserializeObject<live_home>(model.json["data"].ToString());
                     Areas = m.area_entrance_v2[0];
-                    Banner = m.banner[0];
-                    HourRank = m.hour_rank[0];
-                    RoomList = m.room_list;
+                    Banner = m.banner[0]; 
+                    // HourRank = m.hour_rank[0]; 新版API中没有返回hour_rank
+                    // RoomList = m.room_list;
                 }
                 else
                 {

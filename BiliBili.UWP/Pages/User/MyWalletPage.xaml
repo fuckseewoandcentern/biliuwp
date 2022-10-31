@@ -172,15 +172,15 @@
                 <PivotItem.Header>
                     <TextBlock FontSize="16">硬币记录</TextBlock>
                 </PivotItem.Header>
-                <ListView x:Name="list_Coins" Margin="10"  SelectionMode="None" IsItemClickEnabled="True">
+                <ListView x:Name="list_Coins" Margin="10"  SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding result}">
                     <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                            <Setter Property="Background" Value="{ThemeResource Bili-List-Background}"></Setter>
-                            <Setter Property="Margin" Value="0 0 0 10"></Setter>
-                            <Setter Property="Padding" Value="10"></Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                <Setter Property="Background" Value="{ThemeResource Bili-List-Background}"></Setter>
+                                <Setter Property="Margin" Value="0 0 0 10"></Setter>
+                                <Setter Property="Padding" Value="10"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -195,12 +195,10 @@
                                 <TextBlock Text="{Binding reason}"></TextBlock>
                                 <TextBlock Grid.Row="1" FontSize="12" Foreground="Gray" Margin="0 5 0 0" Text="{Binding time}"></TextBlock>
                                 <TextBlock Grid.Column="1" HorizontalAlignment="Right"><Run Text="{Binding Delta}"></Run></TextBlock>
-                             
+
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-
-
                 </ListView>
             </PivotItem>
         </Pivot>

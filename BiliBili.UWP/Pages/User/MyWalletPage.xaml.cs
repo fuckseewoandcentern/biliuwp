@@ -92,7 +92,7 @@ namespace BiliBili.UWP.Pages
             try
             {
                 pr_Load.Visibility = Visibility.Visible;
-                string uri = string.Format("https://account.bilibili.com/home/userInfo");
+                string uri = string.Format("http://api.bilibili.com/x/space/myinfo");
 
 
                 //string uri = string.Format("https://pay.bilibili.com/wallet/api/v1/info?access_key={0}&appkey={1}&build=433000&mobi_app=android&platform=android&ts={2}000",ApiHelper.access_key,ApiHelper._appKey_Android2,ApiHelper.GetTimeSpan);
@@ -392,14 +392,15 @@ namespace BiliBili.UWP.Pages
             {
               
                 pr_Load.Visibility = Visibility.Visible;
-                string uri = string.Format("https://account.bilibili.com/log/getMoneyLog?page=1");
+                string uri = string.Format("https://api.bilibili.com/x/member/web/coin/log");
                 string results = await WebClientClass.GetResults(new Uri(uri));
 
                 CoinsModel model = JsonConvert.DeserializeObject<CoinsModel>(results);
-
+                //Utils.ShowMessageToast(model.code.ToString());
                 if (model.code == 0)
                 {
                     list_Coins.ItemsSource = model.data.result;
+                    //Utils.ShowMessageToast(model.data.result.ToString());
                 }
                 else
                 {
