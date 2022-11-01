@@ -1073,6 +1073,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <AppBarToggleButton x:Name="btn_OpenMenu" Style="{StaticResource OpenMenuButton}" Foreground="White" Width="48" Height="48"  >
                     <AppBarToggleButton.Icon>
@@ -1081,10 +1082,10 @@
 
                 </AppBarToggleButton>
                 <TextBlock x:Name="txt_Header" Grid.Column="1" Margin="10 0" VerticalAlignment="Center" Foreground="White">首页</TextBlock>
-                <Button x:Name="btn_Test" Visibility="Collapsed" Click="btn_Test_Click" Grid.Column="1" Foreground="White" Width="48" Height="48" Background="#00000000">
-                    <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" Glyph="&#xe610;" FontSize="20" />
+                <Button x:Name="btn_Home"  Click="btn_Home_Click" Grid.Column="2" Foreground="White" Width="48" Height="48" Background="#00000000">
+                    <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" Glyph="&#x3435;" FontSize="20" />
                 </Button>
-                <Button x:Name="btn_Down"  Click="btn_Down_Click" Grid.Column="2" Foreground="White" Width="48" Height="48" Background="#00000000">
+                <Button x:Name="btn_Down"  Click="btn_Down_Click" Grid.Column="3" Foreground="White" Width="48" Height="48" Background="#00000000">
                     <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" Glyph="&#xe610;" FontSize="20" />
                 </Button>
 

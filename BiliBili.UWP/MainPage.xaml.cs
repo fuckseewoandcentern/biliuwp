@@ -1010,6 +1010,14 @@ namespace BiliBili.UWP
             ListView list = sender as ListView;
             ListViewItem selected = list.SelectedItem as ListViewItem;
             string name = selected.Name;
+            if (name == "item_home")
+            {
+                btn_Home.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btn_Home.Visibility = Visibility.Collapsed;
+            }
             switch (name)
             {
                 case "item_home":
@@ -1302,9 +1310,12 @@ namespace BiliBili.UWP
             network_error.Visibility = Visibility.Collapsed;
         }
 
-        private void btn_Test_Click(object sender, RoutedEventArgs e)
+        private void btn_Home_Click(object sender, RoutedEventArgs e)
         {
-
+            while (frame.CanGoBack)
+            {
+                frame.GoBack();
+            }
         }
         protected override Size MeasureOverride(Size availableSize)
         {
