@@ -95,6 +95,9 @@ namespace BiliBili.UWP.Views
                 sw_DanmuBorder.IsOn = SettingHelper.Get_DMBorder();
                 sw_Use4GDown.IsOn = SettingHelper.Get_Use4GDown();
                 sw_RefreshButton.IsOn = SettingHelper.Get_RefreshButton();
+                //2022/10/31
+                sw_HideHome.IsOn = SettingHelper.Get_HideHome();
+                sw_HideChannel.IsOn = SettingHelper.Get_HideChannel();
 
                 sw_Play4G.IsOn = SettingHelper.Get_Use4GPlay();
                 sw_BackgroundPlay.IsOn = SettingHelper.Get_BackPlay();
@@ -838,6 +841,16 @@ namespace BiliBili.UWP.Views
         private void sw_DownFLV_Toggled(object sender, RoutedEventArgs e)
         {
             SettingHelper.Set_DownFLV(sw_DownFLV.IsOn);
+        }
+
+        //2022/10/31
+        private void sw_HideHome_Toggled(object sender, RoutedEventArgs e)
+        {
+            SettingHelper.Set_HideHome(sw_HideHome.IsOn);
+        }
+        private void sw_HideChannel_Toggled(object sender, RoutedEventArgs e)
+        {
+            SettingHelper.Set_HideChannel(sw_HideChannel.IsOn);
         }
     }
 }

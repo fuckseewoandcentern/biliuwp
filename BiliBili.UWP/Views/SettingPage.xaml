@@ -246,7 +246,7 @@
                                 </ComboBox>
 
                             </Grid>
-                           
+
                             <Grid Margin="0 10 0 0" Visibility="Collapsed">
                                 <TextBlock Foreground="Gray" VerticalAlignment="Center">播放页面直接播放视频(测试)</TextBlock>
                                 <ToggleSwitch x:Name="sw_PlayPage"  HorizontalAlignment="Right"  Margin="10 0" Width="68"></ToggleSwitch>
@@ -277,6 +277,18 @@
                             <Grid Margin="0 10 0 0">
                                 <TextBlock Foreground="Gray" VerticalAlignment="Center">鼠标侧键及中键返回</TextBlock>
                                 <ToggleSwitch  x:Name="sw_MouseBack" Toggled="sw_MouseBack_Toggled" HorizontalAlignment="Right"  Margin="10 0" Width="68"></ToggleSwitch>
+
+                            </Grid>
+                            <!--2022/10/31 添加两个设置-->
+                            <Grid Margin="0 10 0 0">
+                                <TextBlock Foreground="Gray" VerticalAlignment="Center">隐藏首页(重启生效)</TextBlock>
+                                <ToggleSwitch  x:Name="sw_HideHome" Toggled="sw_HideHome_Toggled" HorizontalAlignment="Right"  Margin="10 0" Width="68"></ToggleSwitch>
+
+                            </Grid>
+
+                            <Grid Margin="0 10 0 0">
+                                <TextBlock Foreground="Gray" VerticalAlignment="Center">隐藏频道(重启生效)</TextBlock>
+                                <ToggleSwitch  x:Name="sw_HideChannel" Toggled="sw_HideChannel_Toggled" HorizontalAlignment="Right"  Margin="10 0" Width="68"></ToggleSwitch>
 
                             </Grid>
                         </StackPanel>

@@ -90,7 +90,6 @@ namespace BiliBili.UWP
             DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
             Window.Current.Content.PointerPressed += MainPage_PointerEntered;
 
-
         }
 
 
@@ -296,6 +295,19 @@ namespace BiliBili.UWP
             {
                 sp_View.DisplayMode = SplitViewDisplayMode.Overlay;
             }
+            //2022/10/31 如果隐藏就删除
+            
+            if (SettingHelper.Get_HideHome())
+            {
+                menu_List.Items.Remove(item_home);
+            }
+
+            if (SettingHelper.Get_HideChannel())
+            {
+                menu_List.Items.Remove(item_channel);
+            }
+
+
             ChangeTheme();
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 5);
@@ -890,6 +902,29 @@ namespace BiliBili.UWP
             //}
         }
         bool _InBangumi = false;
+        //2022/10/31
+        private int ReduceHideIndex()
+        {
+            if (SettingHelper.Get_HideHome())
+            {
+                if (SettingHelper.Get_HideChannel())
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                if (SettingHelper.Get_HideChannel())
+                {
+                    return 1;
+                }
+            }
+            return 0;
+        }
         private void main_frame_Navigated(object sender, NavigationEventArgs e)
         {
             if ((main_frame.Content as Page).Tag == null)
@@ -906,27 +941,30 @@ namespace BiliBili.UWP
                     txt_Header.Text = "首页";
                     break;
                 case "频道":
-                    menu_List.SelectedIndex = 1;
+                    if (SettingHelper.Get_HideChannel() == false)
+                    {
+                        menu_List.SelectedIndex = 1 - ReduceHideIndex();
+                    }
                     txt_Header.Text = "频道";
                     break;
-                case "直播":
-                    menu_List.SelectedIndex = 2;
-                    txt_Header.Text = "直播";
-                    break;
-                case "番剧":
-                    menu_List.SelectedIndex = 3;
-
-                    txt_Header.Text = "番剧";
-                    break;
                 case "动态":
-                    menu_List.SelectedIndex = 4;
+                    menu_List.SelectedIndex = 2 - ReduceHideIndex();
 
                     //menu_List.SelectedIndex = 3;
                     //bottom.SelectedIndex = 3;
                     txt_Header.Text = "动态";
                     break;
+                case "番剧":
+                    menu_List.SelectedIndex = 3 - ReduceHideIndex();
+
+                    txt_Header.Text = "番剧";
+                    break;
+                case "直播":
+                    menu_List.SelectedIndex = 4 - ReduceHideIndex();
+                    txt_Header.Text = "直播";
+                    break;
                 case "发现":
-                    menu_List.SelectedIndex = 5;
+                    menu_List.SelectedIndex = 5 - ReduceHideIndex();
 
                     //menu_List.SelectedIndex = 4;
                     //bottom.SelectedIndex = 4;
@@ -969,10 +1007,12 @@ namespace BiliBili.UWP
             {
                 return;
             }
-
-            switch (menu_List.SelectedIndex)
+            ListView list = sender as ListView;
+            ListViewItem selected = list.SelectedItem as ListViewItem;
+            string name = selected.Name;
+            switch (name)
             {
-                case 0:
+                case "item_home":
                     //if (SettingHelper.Get_NewFeed())
                     //{
                     //   
@@ -988,28 +1028,29 @@ namespace BiliBili.UWP
                     //}
                     txt_Header.Text = "首页";
                     break;
-                case 1:
+                case "item_channel":
                     main_frame.Navigate(typeof(ChannelPage));
-
                     txt_Header.Text = "频道";
                     break;
-                case 2:
+                case "item_live":
                     main_frame.Navigate(typeof(LiveV2Page));
 
                     txt_Header.Text = "直播";
                     break;
-                case 3:
+                case "item_anime":
                     main_frame.Navigate(typeof(BangumiPage));
 
                     txt_Header.Text = "番剧";
                     break;
 
-                case 4:
+                case "item_post":
                     main_frame.Navigate(typeof(AttentionPage));
 
                     txt_Header.Text = "动态";
+                    //menu_list_items.RemoveAt(0);
+                    //menu_List.Items.RemoveAt(0);
                     break;
-                case 5:
+                case "item_discovery":
                     main_frame.Navigate(typeof(FindPage));
 
                     txt_Header.Text = "发现";

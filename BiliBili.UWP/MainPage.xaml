@@ -1165,46 +1165,46 @@
                 <SplitView.Pane>
                     <Grid>
                         <ListView x:Name="menu_List" Foreground="White" SelectionChanged="menu_List_SelectionChanged">
-                            <ListViewItem Style="{StaticResource SelectItem}" Height="48" >
+                            <ListViewItem x:Name="item_home" Style="{StaticResource SelectItem}" Height="48">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" VerticalAlignment="Center" FontSize="18" Margin="4 0" Glyph="&#x3435;" Foreground="White"/>
                                     <!--<SymbolIcon Symbol="Home"  Width="24" Height="24" />-->
                                     <TextBlock Text="首页" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem  Style="{StaticResource SelectItem}" Height="48" >
+                            <ListViewItem x:Name="item_channel" Style="{StaticResource SelectItem}" Height="48" >
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" Margin="4 0" Glyph="&#xE62A;" Foreground="White"/>
                                     <!--<SymbolIcon Symbol="Home"  Width="24" Height="24" />-->
                                     <TextBlock Text="频道" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
                                 </StackPanel>
                             </ListViewItem>
-                            <ListViewItem  Style="{StaticResource SelectItem}" Height="48" >
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" Margin="4 0" Glyph="&#xe648;" Foreground="White"/>
-                                    <!--<SymbolIcon Symbol="Home"  Width="24" Height="24" />-->
-                                    <TextBlock Text="直播" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewItem  Style="{StaticResource SelectItem}" Height="48" >
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" VerticalAlignment="Center" Margin="4 0" Glyph="&#xe662;" Foreground="White"/>
-                                    <!--<SymbolIcon Symbol="Home"  Width="24" Height="24" />-->
-                                    <TextBlock Text="番剧" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
-                                </StackPanel>
-                            </ListViewItem>
-
-
-                            <ListViewItem  Style="{StaticResource SelectItem}" Height="48" >
+                            
+                            <ListViewItem x:Name="item_post" Style="{StaticResource SelectItem}" Height="48" >
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" Margin="4 0" Glyph="&#xe637;" Foreground="White"/>
                                     <!--<SymbolIcon Symbol="Filter" Width="26" Height="26" Foreground="White"/>-->
                                     <TextBlock Text="动态" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
                                 </StackPanel>
                             </ListViewItem>
+                            
+                            <ListViewItem x:Name="item_anime" Style="{StaticResource SelectItem}" Height="48" >
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" VerticalAlignment="Center" Margin="4 0" Glyph="&#xe662;" Foreground="White"/>
+                                    <!--<SymbolIcon Symbol="Home"  Width="24" Height="24" />-->
+                                    <TextBlock Text="番剧" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
+                                </StackPanel>
+                            </ListViewItem>
+                            
+                            <ListViewItem x:Name="item_live" Style="{StaticResource SelectItem}" Height="48" >
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" FontSize="18" Margin="4 0" Glyph="&#xe648;" Foreground="White"/>
+                                    <!--<SymbolIcon Symbol="Home"  Width="24" Height="24" />-->
+                                    <TextBlock Text="直播" VerticalAlignment="Center" Margin="18,2" Foreground="White" />
+                                </StackPanel>
+                            </ListViewItem>
 
-
-                            <ListViewItem  Style="{StaticResource SelectItem}"  Height="48" >
+                            <ListViewItem x:Name="item_discovery" Style="{StaticResource SelectItem}"  Height="48" >
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon FontFamily="ms-appx:///Assets/iconfont.ttf#iconfont" Glyph="&#xe62c;"  FontSize="18" Margin="4 0" Foreground="White"/>
                                     <!--<SymbolIcon Symbol="Download" Width="26" Height="26" Foreground="White"/>-->

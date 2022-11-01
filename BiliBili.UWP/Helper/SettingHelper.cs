@@ -425,8 +425,47 @@ namespace BiliBili.UWP
             container.Values["First" + GetVersion()] = value;
         }
 
+        //2022/10/31
+        public static void Set_HideHome(bool value)
+        {
+            container = ApplicationData.Current.LocalSettings;
+            container.Values["HideHome"] = value;
 
+        }
 
+        public static bool Get_HideHome()
+        {
+            container = ApplicationData.Current.LocalSettings;
+            if (container.Values["HideHome"] != null)
+            {
+                return (bool)container.Values["HideHome"];
+            }
+            else
+            {
+                Set_HideHome(true);
+                return true;
+            }
+        }
+
+        public static void Set_HideChannel(bool value)
+        {
+            container = ApplicationData.Current.LocalSettings;
+            container.Values["HideChannel"] = value;
+        }
+
+        public static bool Get_HideChannel()
+        {
+            container = ApplicationData.Current.LocalSettings;
+            if (container.Values["HideChannel"] != null)
+            {
+                return (bool)container.Values["HideChannel"];
+            }
+            else
+            {
+                Set_HideChannel(true);
+                return true;
+            }
+        }
 
 
 
@@ -1546,7 +1585,6 @@ namespace BiliBili.UWP
             container = ApplicationData.Current.LocalSettings;
             container.Values["ToMp4"] = value;
         }
-
 
 
         #endregion
