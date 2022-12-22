@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
+using Windows.Web.Http.Filters;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -104,9 +106,21 @@ namespace BiliBili.UWP.Pages
 
             try
             {
-                string url = string.Format("http://api.bilibili.com/x/v2/history?pn={0}&ps=30&jsonp=json", PageNum);
+                HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+                HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com")); // Get all cookies
+                string cookie = "";
+                foreach (HttpCookie item in cookieCollection)
+                {
+                    if(item.Name == "SESSDATA")
+                    {
+                        cookie = "SESSDATA=" + item.Value; // Get SESSDATA cookie
+                    }
+                }
 
-                string results = await WebClientClass.GetResults(new Uri(url));
+                string url = string.Format("http://api.bilibili.com/x/v2/history?pn={0}&ps=30&jsonp=json", PageNum);
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", cookie); // Set header
+                string results = await WebClientClass.GetResults(new Uri(url), header);
                 //一层
                 GetHistoryModel model = JsonConvert.DeserializeObject<GetHistoryModel>(results);
                 if (model.data == null)

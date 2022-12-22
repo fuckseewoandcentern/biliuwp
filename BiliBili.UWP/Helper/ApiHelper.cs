@@ -1,25 +1,14 @@
-﻿using BiliBili.UWP.Controls;
-using BiliBili.UWP.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
-using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.UI.Xaml.Controls;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
-using System.Xml.Linq;
-using BiliBili.UWP.Helper;
 
 namespace BiliBili.UWP
 {
@@ -183,6 +172,35 @@ namespace BiliBili.UWP
             foreach (HttpCookie item in cookieCollection)
             {
                 cookie += item.Name + "=" + item.Value + ";";
+            }
+            return cookie;
+        }
+
+        public static string GetSESSDATA()
+        {
+            HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+            HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com/"));
+            string cookie = "";
+            foreach (HttpCookie item in cookieCollection)
+            {
+                if(item.Name == "SESSDATA")
+                {
+                    cookie += item.Name + "=" + item.Value;
+                }
+            }
+            return cookie;
+        }
+        public static string GetCSRF()
+        {
+            HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+            HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com/"));
+            string cookie = "";
+            foreach (HttpCookie item in cookieCollection)
+            {
+                if (item.Name == "bili_jct")
+                {
+                    cookie += item.Value;
+                }
             }
             return cookie;
         }

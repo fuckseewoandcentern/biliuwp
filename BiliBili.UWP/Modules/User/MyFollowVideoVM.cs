@@ -83,23 +83,26 @@ namespace BiliBili.UWP.Modules.User
             {
                 Loading = true;
 
-                var results = await followAPI.MyFavorite().Request();
+                var results = await followAPI.MyCreatedFavorite().Request();
+                //var results2 = await followAPI.MyFavorite().Request();
                 if (results.status)
                 {
-                    var data = await results.GetJson<ApiDataModel<JArray>>();
+                    var data = await results.GetJson<CollectionListModel>();
+                    //var data2 = await results2.GetJson<CollectionListModel>();
                     if (data.success)
                     {
-                        if (data.data[0]["mediaListResponse"] != null)
+                        if (data.data.list != null)
                         {
-                            MyFavorite = await data.data[0]["mediaListResponse"]["list"].ToString().DeserializeJson<ObservableCollection<FavoriteItemModel>>();
+                            MyFavorite = await data.data.list.ToString().DeserializeJson<ObservableCollection<FavoriteItemModel>>();
+                            //MyFavorite = await data.data.list.ToString().DeserializeJson<ObservableCollection<FavoriteItemModel>>();
                             CurrentFavorite = MyFavorite[0];
                             DoPropertyChanged("CurrentFavorite");
                             LoadFavoriteVideos();
                         }
-                        if (data.data[1]["mediaListResponse"] != null)
-                        {
-                            CollectFavorite = await data.data[1]["mediaListResponse"]["list"].ToString().DeserializeJson<ObservableCollection<FavoriteItemModel>>();
-                        }
+                        //if (data.data[1]["mediaListResponse"] != null)
+                        //{
+                        //    CollectFavorite = await data.data[1]["mediaListResponse"]["list"].ToString().DeserializeJson<ObservableCollection<FavoriteItemModel>>();
+                        //}
                     }
                     else
                     {
@@ -186,7 +189,7 @@ namespace BiliBili.UWP.Modules.User
             try
             {
 
-                var results = await followAPI.RemoveFavorite(CurrentFavorite.fid, item.id).Request();
+                var results = await followAPI.RemoveFavorite(CurrentFavorite.id, item.id).Request();
                 if (results.status)
                 {
                     var data = await results.GetJson<ApiDataModel<object>>();
@@ -338,5 +341,38 @@ namespace BiliBili.UWP.Modules.User
         public int play { get; set; }
         public int reply { get; set; }
         public int share { get; set; }
+    }
+
+    public class CollectionListModel
+    {
+        public int code { get; set; }
+        private string _message;
+        public string message
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_message))
+                {
+                    return msg;
+                }
+                else
+                {
+                    return _message;
+                }
+            }
+            set { _message = value; }
+        }
+        public string msg { get; set; } = "";
+
+        public bool success
+        {
+            get
+            {
+                return code == 0;
+            }
+        }
+        public CollectionListModel data { get; set; }
+
+        public object list;
     }
 }

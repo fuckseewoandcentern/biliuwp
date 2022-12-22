@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
+using Windows.Web.Http.Filters;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -54,14 +56,27 @@ namespace BiliBili.UWP.Pages
             try
             {
                 pr_Load.Visibility = Visibility.Visible;
-                string uri = string.Format("https://pay.bilibili.com/user/info/v2");
+                string uri = string.Format("http://api.bilibili.com/x/web-interface/nav");
                 //uri += "&sign=" + ApiHelper.GetSign(uri);
 
                 //string uri = string.Format("https://pay.bilibili.com/wallet/api/v1/info?access_key={0}&appkey={1}&build=433000&mobi_app=android&platform=android&ts={2}000",ApiHelper.access_key,ApiHelper._appKey_Android2,ApiHelper.GetTimeSpan);
                 //uri += "&sign=" + ApiHelper.GetSign_Android2(uri);
+                HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+                HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com")); // Get all cookies
+                string cookie = "";
+                foreach (HttpCookie item in cookieCollection)
+                {
+                    if (item.Name == "SESSDATA")
+                    {
+                        cookie = "SESSDATA=" + item.Value; // Get SESSDATA cookie
+                    }
+                }
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", cookie); // Set header
+                string results = await WebClientClass.GetResults(new Uri(uri), header);
 
-                string results = await WebClientClass.GetResults(new Uri(uri));
                 WalletModel model = JsonConvert.DeserializeObject<WalletModel>(results);
+
                 if (model.code == 0)
                 {
                     this.DataContext = model.data.wallet;
@@ -93,18 +108,32 @@ namespace BiliBili.UWP.Pages
             {
                 pr_Load.Visibility = Visibility.Visible;
                 string uri = string.Format("http://api.bilibili.com/x/space/myinfo");
+                //string uri = string.Format("http://account.bilibili.com/site/getCoin");
+                HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+                HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com")); // Get all cookies
+                string cookie = "";
+                foreach (HttpCookie item in cookieCollection)
+                {
+                    if (item.Name == "SESSDATA")
+                    {
+                        cookie = "SESSDATA=" + item.Value; // Get SESSDATA cookie
+                    }
+                }
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", cookie); // Set header
 
+                string results = await WebClientClass.GetResults(new Uri(uri), header);
 
                 //string uri = string.Format("https://pay.bilibili.com/wallet/api/v1/info?access_key={0}&appkey={1}&build=433000&mobi_app=android&platform=android&ts={2}000",ApiHelper.access_key,ApiHelper._appKey_Android2,ApiHelper.GetTimeSpan);
                 //uri += "&sign=" + ApiHelper.GetSign_Android2(uri);
                 //string i = "mid=" + ApiHelper.GetUserId() + "&_=" + ApiHelper.GetTimeSpan_2;
-                string results = await WebClientClass.GetResults(new Uri(uri));
 
                 _UserInfoModel model = JsonConvert.DeserializeObject<_UserInfoModel>(results);
-            
+                model.coins = model.data.coins;
+                //dynamic model = JsonConvert.DeserializeObject(results);
                 if (model.code == 0)
                 {
-                    grid_coions.DataContext = model.data;
+                    grid_coions.DataContext = model;
                 }
                 else
                 {
@@ -393,13 +422,26 @@ namespace BiliBili.UWP.Pages
               
                 pr_Load.Visibility = Visibility.Visible;
                 string uri = string.Format("https://api.bilibili.com/x/member/web/coin/log");
-                string results = await WebClientClass.GetResults(new Uri(uri));
+                HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+                HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com")); // Get all cookies
+                string cookie = "";
+                foreach (HttpCookie item in cookieCollection)
+                {
+                    if (item.Name == "SESSDATA")
+                    {
+                        cookie = "SESSDATA=" + item.Value; // Get SESSDATA cookie
+                    }
+                }
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", cookie); // Set header
+
+                string results = await WebClientClass.GetResults(new Uri(uri), header);
 
                 CoinsModel model = JsonConvert.DeserializeObject<CoinsModel>(results);
                 //Utils.ShowMessageToast(model.code.ToString());
                 if (model.code == 0)
                 {
-                    list_Coins.ItemsSource = model.data.result;
+                    list_Coins.ItemsSource = model.data.list;
                     //Utils.ShowMessageToast(model.data.result.ToString());
                 }
                 else
@@ -534,7 +576,7 @@ namespace BiliBili.UWP.Pages
         public int code { get; set; }
         public string message { get; set; }
         public CoinsModel data { get; set; }
-        public List<CoinsModel> result { get; set; }
+        public List<CoinsModel> list { get; set; }
 
         public string time { get; set; }
         public string reason { get; set; }

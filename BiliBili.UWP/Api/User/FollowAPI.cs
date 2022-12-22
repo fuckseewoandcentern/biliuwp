@@ -100,10 +100,13 @@ namespace BiliBili.UWP.Api.User
             ApiModel api = new ApiModel()
             {
                 method = HttpMethod.GET,
-                baseUrl = "https://api.bilibili.com/medialist/gateway/base/space",
-                parameter = ApiUtils.MustParameter(ApiUtils.AndroidKey, true) + $"&up_mid={ApiHelper.GetUserId()}"
+                //baseUrl = "https://api.bilibili.com/medialist/gateway/base/space",
+                baseUrl = "http://api.bilibili.com/x/v3/fav/folder/collected/list",
+                parameter = $"up_mid={ApiHelper.GetUserId()}&pn=1&ps=100",
+                headers = new Dictionary<string, string>()
             };
-            api.parameter += ApiUtils.GetSign(api.parameter, ApiUtils.AndroidKey);
+            api.headers.Add("Cookie", ApiHelper.GetSESSDATA());
+            //api.parameter += ApiUtils.GetSign(api.parameter, ApiUtils.AndroidKey);
             return api;
         }
 
@@ -111,15 +114,18 @@ namespace BiliBili.UWP.Api.User
         /// 我创建的收藏夹
         /// </summary>
         /// <returns></returns>
-        public ApiModel MyCreatedFavorite(string aid)
+        public ApiModel MyCreatedFavorite()
         {
             ApiModel api = new ApiModel()
             {
                 method = HttpMethod.GET,
-                baseUrl = "https://api.bilibili.com/medialist/gateway/base/created",
-                parameter = ApiUtils.MustParameter(ApiUtils.AndroidKey, true) + $"&rid={aid}&up_mid={ApiHelper.GetUserId()}&type=2&pn=1&ps=100"
+                //baseUrl = "https://api.bilibili.com/medialist/gateway/base/created",
+                baseUrl = "http://api.bilibili.com/x/v3/fav/folder/created/list-all",
+                parameter = $"&up_mid={ApiHelper.GetUserId()}"
             };
-            api.parameter += ApiUtils.GetSign(api.parameter, ApiUtils.AndroidKey);
+            api.headers = new Dictionary<string, string>();
+            api.headers.Add("Cookie", ApiHelper.GetSESSDATA());
+            //api.parameter += ApiUtils.GetSign(api.parameter, ApiUtils.AndroidKey);
             return api;
         }
 
@@ -138,10 +144,14 @@ namespace BiliBili.UWP.Api.User
             ApiModel api = new ApiModel()
             {
                 method = HttpMethod.POST,
-                baseUrl = "https://api.bilibili.com/medialist/gateway/coll/resource/deal",
-                body = ApiUtils.MustParameter(ApiUtils.AndroidKey, true) + $"&add_media_ids={ids}&rid={avid}&type=2"
+                baseUrl = "http://api.bilibili.com/x/v3/fav/resource/deal",
+                body = $"add_media_ids={ids}&rid={avid}&type=2&csrf={ApiHelper.GetCSRF()}"
             };
-            api.body += ApiUtils.GetSign(api.body, ApiUtils.AndroidKey);
+            api.headers = new Dictionary<string, string>();
+            api.headers.Add("Cookie", ApiHelper.GetSESSDATA());
+            api.headers.Add("Referer", "https://www.bilibili.com");
+            //api.headers.Add("Cookie", ApiHelper.GetCSRF());
+            //api.body += ApiUtils.GetSign(api.body, ApiUtils.AndroidKey);
             return api;
         }
 
@@ -172,9 +182,12 @@ namespace BiliBili.UWP.Api.User
             ApiModel api = new ApiModel()
             {
                 method = HttpMethod.GET,
-                baseUrl = "https://api.bilibili.com/medialist/gateway/base/detail",
-                parameter = ApiUtils.MustParameter(ApiUtils.AndroidKey, true) + $"&media_id={fid}&mid={ApiHelper.GetUserId()}&keyword={Uri.EscapeDataString(keyword)}&pn={page}&ps=20"
+                //baseUrl = "https://api.bilibili.com/medialist/gateway/base/detail",
+                baseUrl = "http://api.bilibili.com/x/v3/fav/resource/list",
+                parameter = $"media_id={fid}&mid={ApiHelper.GetUserId()}&keyword={Uri.EscapeDataString(keyword)}&pn={page}&ps=20"
             };
+            api.headers = new Dictionary<string, string>();
+            api.headers.Add("Cookie", ApiHelper.GetSESSDATA());
             api.parameter += ApiUtils.GetSign(api.parameter, ApiUtils.AndroidKey);
             return api;
         }
@@ -189,9 +202,12 @@ namespace BiliBili.UWP.Api.User
             ApiModel api = new ApiModel()
             {
                 method = HttpMethod.POST,
-                baseUrl = "https://api.bilibili.com/x/v2/fav/video/del",
-                body = ApiUtils.MustParameter(ApiUtils.AndroidKey, true) + $"&fid={fid}&aid={avid}"
+                baseUrl = "http://api.bilibili.com/x/v3/fav/resource/deal",
+                body = $"del_media_ids={fid}&rid={avid}&type=2&csrf={ApiHelper.GetCSRF()}"
             };
+            api.headers = new Dictionary<string, string>();
+            api.headers.Add("Cookie", ApiHelper.GetSESSDATA());
+            api.headers.Add("Referer", "https://www.bilibili.com");
             api.body += ApiUtils.GetSign(api.body, ApiUtils.AndroidKey);
             return api;
         }

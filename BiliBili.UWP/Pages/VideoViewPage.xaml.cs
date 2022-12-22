@@ -642,7 +642,7 @@ namespace BiliBili.UWP.Pages
             {
                 try
                 {
-                    var result = await followAPI.MyCreatedFavorite(_aid).Request();
+                    var result = await followAPI.MyCreatedFavorite().Request();
                     if (result.status)
                     {
                         var data = await result.GetJson<ApiDataModel<JObject>>();

@@ -34,7 +34,7 @@
                         <StackPanel Margin="10" Padding="10" Background="{ThemeResource Bili-List-Background }">
                             <TextBlock Foreground="Gray">B币余额</TextBlock>
                             <Grid>
-                                <TextBlock FontSize="18" VerticalAlignment="Center" Text="{Binding defaultBp}"></TextBlock>
+                                <TextBlock FontSize="18" VerticalAlignment="Center" Text="{Binding bcoin_balance}"></TextBlock>
                                
                             </Grid>
 

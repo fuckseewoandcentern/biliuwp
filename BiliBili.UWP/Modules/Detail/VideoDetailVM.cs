@@ -92,7 +92,7 @@ namespace BiliBili.UWP.Modules.Detail
                 {
                     return;
                 }
-                var results = await followAPI.MyCreatedFavorite(avid).Request();
+                var results = await followAPI.MyCreatedFavorite().Request();
                 if (results.status)
                 {
                     var data = await results.GetJson<ApiDataModel<JObject>>();

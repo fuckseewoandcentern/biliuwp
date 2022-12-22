@@ -21,6 +21,8 @@ using BiliBili.UWP.Pages.Season;
 using BiliBili.UWP.Api.User;
 using BiliBili.UWP.Api;
 using Newtonsoft.Json.Linq;
+using Windows.Web.Http.Filters;
+using Windows.Web.Http;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -77,25 +79,33 @@ namespace BiliBili.UWP.Views
             try
             {
                 pr_Load.Visibility = Visibility.Visible;
-                var result =await new FollowAPI().MyFollowBangumi().Request();
-
-                if (result.status)
+                HttpBaseProtocolFilter hb = new HttpBaseProtocolFilter();
+                HttpCookieCollection cookieCollection = hb.CookieManager.GetCookies(new Uri("https://bilibili.com")); // Get all cookies
+                string cookie = "";
+                foreach (HttpCookie item in cookieCollection)
                 {
-                    var data = await result.GetJson<ApiResultModel<JObject>>();
-                    if (data.success)
+                    if (item.Name == "SESSDATA")
                     {
-                        list_ban_mine.ItemsSource  = (await data.result["follow_list"].ToString().DeserializeJson<List<FollowSeasonModel>>()).Take(9).ToList();
+                        cookie = "SESSDATA=" + item.Value; // Get SESSDATA cookie
                     }
-                    else
-                    {
-                        Utils.ShowMessageToast(data.message);
-                    }
+                }
+
+                string url = string.Format("http://space.bilibili.com/ajax/Bangumi/getList?mid=" + ApiHelper.GetUserId());
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", cookie); // Set header
+                string result = await WebClientClass.GetResults(new Uri(url), header);
+                FollowedBanModel model = JsonConvert.DeserializeObject<FollowedBanModel>(result);
+                
+                //var data = await result.GetJson<ApiResultModel<JObject>>();
+                if (model.success)
+                {
+                    list_ban_mine.ItemsSource = (await model.data.result.ToString().DeserializeJson<List<FollowSeasonModel>>()).Take(9).ToList();
                 }
                 else
                 {
-                    Utils.ShowMessageToast(result.message);
+                    Utils.ShowMessageToast(model.message);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -233,6 +243,40 @@ namespace BiliBili.UWP.Views
             {
                 LoadHome();
             }
+        }
+
+        public class FollowedBanModel
+        {
+            public int code { get; set; }
+            private string _message;
+            public string message
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(_message))
+                    {
+                        return msg;
+                    }
+                    else
+                    {
+                        return _message;
+                    }
+                }
+                set { _message = value; }
+            }
+            public string msg { get; set; } = "";
+
+            public bool success
+            {
+                get
+                {
+                    return code == 0;
+                }
+            }
+
+            public object result { get; set; }
+
+            public FollowedBanModel data { get; set; }
         }
     }
 }
