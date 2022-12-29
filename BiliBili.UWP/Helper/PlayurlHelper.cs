@@ -662,14 +662,20 @@ namespace BiliBili.UWP.Helper
                 List<string> urls = new List<string>();
                 //string url = $"https://api.bilibili.com/x/player/playurl?appkey={ApiHelper.AndroidKey.Appkey}&avid={ aid}&cid={cid}&qn={qn}&type=&otype=json&fnver=0&fnval=16";
 
-                string url = $"https://api.bilibili.com/x/player/playurl?avid={aid}&cid={cid}&qn={qn}&type=&otype=json&fourk=1&fnver=0&fnval=16&appkey={ ApiHelper.WebVideoKey.Appkey}";
+                string url = $"https://api.bilibili.com/x/player/playurl?avid={aid}&cid={cid}&qn={qn}&type=&otype=json&fourk=1&fnver=0&fnval=16";
                 //url += "&sign=" + ApiHelper.GetSign(url, ApiHelper.WebVideoKey);
                 if (ApiHelper.IsLogin())
                 {
-                    url += $"&access_key={ApiHelper.access_key}&mid={ApiHelper.GetUserId()}";
+                    url += $"&mid={ApiHelper.GetUserId()}&csrf={ApiHelper.GetCSRF()}";
                 }
-                url = ApiHelper.GetSignWithUrl(url, ApiHelper.WebVideoKey);
-                string re = await WebClientClass.GetResults(new Uri(url));
+
+                //url = ApiHelper.GetSignWithUrl(url, ApiHelper.WebVideoKey);
+
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", ApiHelper.GetSESSDATA());
+                header.Add("Referer", "https://www.bilibili.com");
+                string re = await WebClientClass.GetResults(new Uri(url), header);
+
                 JObject obj = JObject.Parse(re);
                 if (obj["code"].ToInt32() == 0)
                 {
@@ -722,9 +728,15 @@ namespace BiliBili.UWP.Helper
             try
             {
                 List<string> urls = new List<string>();
-                string url = $"https://api.bilibili.com/x/player/playurl?avid={aid}&cid={cid}&qn={qn}&type=&otype=json&appkey={ApiHelper.WebVideoKey.Appkey}";
-                url += "&sign=" + ApiHelper.GetSign(url, ApiHelper.WebVideoKey);
-                string re = await WebClientClass.GetResults(new Uri(url));
+                string url = $"https://api.bilibili.com/x/player/playurl?avid={aid}&cid={cid}&qn={qn}&type=&otype=json";
+                if (ApiHelper.IsLogin())
+                {
+                    url += $"&mide={ApiHelper.GetUserId()}&csrf={ApiHelper.GetCSRF()}";
+                }
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", ApiHelper.GetSESSDATA());
+                header.Add("Referer", "https://www.bilibili.com");
+                string re = await WebClientClass.GetResults(new Uri(url), header);
                 FlvPlyaerUrlModel m = JsonConvert.DeserializeObject<FlvPlyaerUrlModel>(re);
                 if (m.code == 0)
                 {
@@ -891,17 +903,20 @@ namespace BiliBili.UWP.Helper
             {
                 var qn = 64;
 
-                string url = $"https://api.bilibili.com/x/player/playurl?avid={model.Aid}&cid={model.Mid}&qn={qn}&type=&otype=json&appkey={ ApiHelper.WebVideoKey.Appkey}";
+                string url = $"https://api.bilibili.com/x/player/playurl?avid={model.Aid}&cid={model.Mid}&qn={qn}&type=&otype=json";
                 if ((!down && SettingHelper.Get_UseDASH()) || (down && !SettingHelper.Get_DownFLV()))
                 {
                     url += "&fourk=1&fnver=0&fnval=16";
                 }
                 if (ApiHelper.IsLogin())
                 {
-                    url += $"&access_key={ApiHelper.access_key}&mid={ApiHelper.GetUserId()}";
+                    url += $"&mid={ApiHelper.GetUserId()}&csrf={ApiHelper.GetCSRF()}";
                 }
-                url += "&sign=" + ApiHelper.GetSign(url, ApiHelper.WebVideoKey);
-                string re = await WebClientClass.GetResults(new Uri(url));
+                //url += "&sign=" + ApiHelper.GetSign(url, ApiHelper.WebVideoKey);
+                Dictionary<string, string> header = new Dictionary<string, string>();
+                header.Add("Cookie", ApiHelper.GetSESSDATA());
+                header.Add("Referer", "https://www.bilibili.com");
+                string re = await WebClientClass.GetResults(new Uri(url),header);
 
                 //var mc = Regex.FlvPlyaerUrlModel(re, @"<length>(.*?)</length>.*?<size>(.*?)</size>.*?<url><!\[CDATA\[(.*?)\]\]></url>", RegexOptions.Singleline);
                 FlvPlyaerUrlModel m = JsonConvert.DeserializeObject<FlvPlyaerUrlModel>(re);

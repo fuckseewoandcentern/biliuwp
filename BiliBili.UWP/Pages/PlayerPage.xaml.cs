@@ -1242,7 +1242,7 @@ namespace BiliBili.UWP.Pages
             catch (Exception ex)
             {
                 AddLog("视频播放失败了" + ex.HResult);
-                await new MessageDialog("无法读取到播放地址 ＞﹏＜ \r\n请尝试登录、更换清晰度、开通大会员后再试").ShowAsync();
+                await new MessageDialog("无法读取到播放地址 ＞﹏＜ \r\n请尝试登录、更换清晰度、开通大会员后再试" + ex.ToString()).ShowAsync();
             }
             finally
             {
